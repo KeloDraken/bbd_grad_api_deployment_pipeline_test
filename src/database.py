@@ -9,6 +9,7 @@ class DB:
     """
     Database class
     """
+
     def __init__(self):
         self.todos: list[Todo] = [
             Todo(text="TODO 1", completed=False),
