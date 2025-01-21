@@ -1,10 +1,9 @@
 name: Deploy Lambda Layers
 
 on:
-  pull_request:
+  push:
     branches:
       - master
-    types: [closed]
     workflow_dispatch:
 
 jobs:
@@ -21,11 +20,10 @@ jobs:
 
       - name: Install Python Library and Zip
         run: |
-          cd src
           mkdir -p app/
-          pip3 install -r requirements.txt -t app/
-          cp . -r app/
-          zip -r package.zip lambda_layers/
+          cp src/* app/
+          pip3 install -r src/requirements.txt -t app/
+          zip -r package.zip app/
 
       - name: Upload Library Zip
         uses: actions/upload-artifact@v3
